@@ -24,7 +24,7 @@ class App extends Component {
 
     // Load DaiToken
     const daiTokenData = DaiToken.networks[networkId]
-    if(daiTokenData) {
+    if (daiTokenData) {
       const daiToken = new web3.eth.Contract(DaiToken.abi, daiTokenData.address)
       this.setState({ daiToken })
       let daiTokenBalance = await daiToken.methods.balanceOf(this.state.account).call()
@@ -35,7 +35,7 @@ class App extends Component {
 
     // Load DappToken
     const dappTokenData = DappToken.networks[networkId]
-    if(dappTokenData) {
+    if (dappTokenData) {
       const dappToken = new web3.eth.Contract(DappToken.abi, dappTokenData.address)
       this.setState({ dappToken })
       let dappTokenBalance = await dappToken.methods.balanceOf(this.state.account).call()
@@ -46,7 +46,7 @@ class App extends Component {
 
     // Load TokenFarm
     const tokenFarmData = TokenFarm.networks[networkId]
-    if(tokenFarmData) {
+    if (tokenFarmData) {
       const tokenFarm = new web3.eth.Contract(TokenFarm.abi, tokenFarmData.address)
       this.setState({ tokenFarm })
       let stakingBalance = await tokenFarm.methods.stakingBalance(this.state.account).call()
@@ -74,7 +74,7 @@ class App extends Component {
   stakeTokens = (amount) => {
     this.setState({ loading: true })
     this.state.daiToken.methods.approve(this.state.tokenFarm._address, amount).send({ from: this.state.account }).on('transactionHash', (hash) => {
-      this.state.tokenFarm.methods.stakeTokens(amount).send({ from: this.state.account }).on('transactionHash', (hash) => {
+      this.state.tokenFarm.methods.stackTokens(amount).send({ from: this.state.account }).on('transactionHash', (hash) => {
         this.setState({ loading: false })
       })
     })
@@ -82,7 +82,7 @@ class App extends Component {
 
   unstakeTokens = (amount) => {
     this.setState({ loading: true })
-    this.state.tokenFarm.methods.unstakeTokens().send({ from: this.state.account }).on('transactionHash', (hash) => {
+    this.state.tokenFarm.methods.unstackTokens().send({ from: this.state.account }).on('transactionHash', (hash) => {
       this.setState({ loading: false })
     })
   }
@@ -103,7 +103,7 @@ class App extends Component {
 
   render() {
     let content
-    if(this.state.loading) {
+    if (this.state.loading) {
       content = <p id="loader" className="text-center">Loading...</p>
     } else {
       content = <Main
