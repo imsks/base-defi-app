@@ -2,7 +2,6 @@ const TokenFarm = artifacts.require('TokenFarm')
 const DappToken = artifacts.require('DappToken')
 const DaiToken = artifacts.require('DaiToken')
 
-
 module.exports = async function (deployer, network, accounts) {
   // Deploy mock Dai token
   await deployer.deploy(DaiToken)
